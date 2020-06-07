@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -34,9 +35,11 @@ public class Controller implements Initializable {
     Button button9;
     @FXML
     Label playerLabel;
-     int flags [][]=new  int[3][3];
+
+     int[][] matrix =new  int[3][3];
 
      String player1="Player 1";
+
      String player2="Player 2";
      boolean isPlyr1=true;
 
@@ -48,19 +51,21 @@ public class Controller implements Initializable {
         button1.setOnAction(event -> {
                     System.out.println("button1 cliked");
 
-                   flags[0][0]=isPlyr1?1:2;
-                    check(flags[0][0]);
+                   matrix[0][0]=isPlyr1?1:2;
+                   System.out.println(matrix[0][0]);
+                    check(matrix[0][0]);
                     changeButtonText(button1);
 
                 }
         );
         button2.setOnAction(event ->
                 {
-                    System.out.println("button1 cliked");
+                    System.out.println("button2 cliked");
+                    matrix[0][1]=isPlyr1?1:2;
 
                     changeButtonText(button2);
-                    flags[0][1]=isPlyr1?1:2;
-                    check(flags[0][0]);
+
+                    check(matrix[0][0]);
                 }
 
 
@@ -68,10 +73,10 @@ public class Controller implements Initializable {
         button3.setOnAction(event ->
                 {
                     System.out.println("button3 cliked");
-                    flags[0][2]=isPlyr1?1:2;
+                    matrix[0][2]=isPlyr1?1:2;
 
                     changeButtonText(button3);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
                 }
 
 
@@ -79,9 +84,9 @@ public class Controller implements Initializable {
         button4.setOnAction(event ->
                 {
                     System.out.println("button4 cliked");
-                    flags[1][0]=isPlyr1?1:2;
+                    matrix[1][0]=isPlyr1?1:2;
                     changeButtonText(button4);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
                 }
 
 
@@ -89,9 +94,9 @@ public class Controller implements Initializable {
         button5.setOnAction(event ->
                 {
                     System.out.println("button5 cliked");
-                    flags[1][1]=isPlyr1?1:2;
+                    matrix[1][1]=isPlyr1?1:2;
                     changeButtonText(button5);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
                 }
 
 
@@ -99,17 +104,17 @@ public class Controller implements Initializable {
         button6.setOnAction(event ->
                 {
                     System.out.println("button6 cliked");
-                    flags[1][2]=isPlyr1?1:2;
+                    matrix[1][2]=isPlyr1?1:2;
                     changeButtonText(button6);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
                 }
         );
         button7.setOnAction(event ->
                 {
                     System.out.println("button7 cliked");
-                    flags[2][0]=isPlyr1?1:2;
+                    matrix[2][0]=isPlyr1?1:2;
                     changeButtonText(button7);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
                 }
 
 
@@ -117,17 +122,17 @@ public class Controller implements Initializable {
         button8.setOnAction(event ->
                 {
                     System.out.println("button8 cliked");
-                    flags[2][1]=isPlyr1?1:2;
+                    matrix[2][1]=isPlyr1?1:2;
                     changeButtonText(button8);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
                 }
 
         );
         button9.setOnAction(event ->{
                 System.out.println("button9 cliked");
-                    flags[2][2]=isPlyr1?1:2;
+                    matrix[2][2]=isPlyr1?1:2;
         changeButtonText(button9);
-                    check(flags[0][0]);
+                    check(matrix[0][0]);
     }
 
 
@@ -139,31 +144,81 @@ public class Controller implements Initializable {
     }
 
     private boolean check(int value) {
-        if(value==1||value==2)
-        {
-                        //code if user already clicked a button
-        }
 
-        for(int i=0;i<3;i++)
+
+        for(int tempArray[]:matrix)
         {
-            boolean tempFlag=true;
-            int temp=flags[i][0];
-            for(int j=0;j<3;j++)
+
+
+            boolean flag=true;
+            int element=tempArray[0];
+
+            for(int i=1;i<tempArray.length;i++)
             {
-                if(temp!=flags[i][j]) {
-                    tempFlag=false;
+
+                if(element!=tempArray[i])
+                {
+                    flag=false;
                 }
-                }
-               if(tempFlag==true)
-                   System.out.println("wins: "+temp);
+
+            }
+            if(flag &&element!=0)
+            {
+                System.out.println("\n"+element+": player wins");
+                winMessage(element);
             }
 
+        }
+        for (int i=0;i<3;i++)
+        {
+            boolean flag=true;
+            int element=matrix[0][i];
+            for(int j=1;j<3;j++)
+            {
+               if(matrix[j][i]!=element)
+               {flag=false;
+                 break;
+               }
+
+            }
+            if(flag &&element!=0)
+            {
+                winMessage(element);
+            }
+        }
+        int element=matrix[0][0];
+        boolean flagTemp=true;
+        for (int i=1;i<3;i++)
+        {
+
+            if(element!=matrix[i][i])
+                 flagTemp=false;
+
+        }
+        if(flagTemp &&element!=0)
+        {
+            winMessage(element);
+        }
+        int element3=matrix[0][2];
+        if(element3==matrix[1][1]&&matrix[2][0]==element3)
+        {
+            if(element3!=0)
+                winMessage(element3);
+        }
 
         return  true;
 
         }
 
+    private void winMessage(int element) {
+        Alert result=new Alert(Alert.AlertType.INFORMATION);
+        result.setTitle("Result");
+        result.setHeaderText("Winner");
+        result.setContentText("Player "+element+" wins the game.");
+        result.show();
 
+        return;
+    }
 
 
     private void changeButtonText(Button button) {

@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raghib.tictac.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.raghib.tictac.Controller">
    <children>
-      <GridPane prefHeight="343.0" prefWidth="593.0">
+      <GridPane gridLinesVisible="true" prefHeight="262.0" prefWidth="297.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,7 +56,7 @@
                </font></Button>
          </children>
       </GridPane>
-      <Label id="playerLabel" alignment="CENTER" prefHeight="39.0" prefWidth="375.0" text="Player Turn" textFill="#081b3c">
+      <Label id="playerLabel" alignment="CENTER" prefHeight="53.0" prefWidth="297.0" text="Player Turn" textFill="#081b3c">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
